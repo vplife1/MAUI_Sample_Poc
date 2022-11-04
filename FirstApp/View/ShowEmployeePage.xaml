@@ -7,7 +7,7 @@
              xmlns:viewmodels="clr-namespace:FirstApp.ViewModel"
              Title="ShowEmployeePage">
     <VerticalStackLayout Padding="10,0,10,0">
-        <Button Text="Add New Record" Margin="0,10,0,0" BackgroundColor="Green" Command="{Binding AddEmpCommand}" />
+        <Button Text="Add New Record"  Command="{Binding AddEmpCommand}" />
 
         <Grid Margin="0,5,0,5" RowDefinitions="Auto" ColumnDefinitions="33*,33*,33*">
             <Label Text="Name"  FontAttributes="Bold" HorizontalTextAlignment="Start"  Grid.Row="0" Grid.Column="0" />
