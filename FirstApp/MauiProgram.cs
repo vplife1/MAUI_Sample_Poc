@@ -27,7 +27,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ShowEmployeePage>();
         builder.Services.AddTransient<PersonRepository>();
         builder.Services.AddTransient<EmployeeService>();
-        builder.Services.AddTransient<IEmployeeService>();
+      //  builder.Services.AddTransient<IEmployeeService>();
 
         return builder.Build();
 	}
