@@ -35,7 +35,6 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,6 +49,8 @@
 
 	<ItemGroup>
 	  <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+	  <PackageReference Include="SQLitePCL.raw" Version="0.9.2" />
+	  <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
 	</ItemGroup>
 
 	<ItemGroup>

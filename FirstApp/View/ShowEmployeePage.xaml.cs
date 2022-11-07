@@ -16,5 +16,6 @@ public partial class ShowEmployeePage : ContentPage
     {
         base.OnAppearing();
         _viewModel.ShowEmployee();
+        _viewModel.ShowZipCode();
     }
 }

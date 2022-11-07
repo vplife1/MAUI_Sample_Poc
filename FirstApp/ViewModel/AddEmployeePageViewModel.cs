@@ -67,11 +67,11 @@ namespace FirstApp.ViewModel
             };
             if (_employeeID > 0)
             {
-                _employeeService.UpdateEmployee(obj);
+               await _employeeService.UpdateEmployee(obj);
             }
             else
             {
-                _employeeService.InsertEmployee(obj);
+              await  _employeeService.InsertEmployee(obj);
             }
             await App.Current.MainPage.Navigation.PopAsync();
         });
