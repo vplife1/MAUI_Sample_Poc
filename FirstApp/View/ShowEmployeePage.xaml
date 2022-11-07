@@ -28,5 +28,23 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Label Text="Consume Web-API Ex:Get ZipCode" TextColor="Green" FontSize="Header" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        <Grid Margin="0,5,0,5" RowDefinitions="Auto" ColumnDefinitions="33*,33*,33*">
+            <Label Text="Zip"  FontAttributes="Bold" HorizontalTextAlignment="Start"  Grid.Row="0" Grid.Column="0" />
+            <Label Text="City" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="1" />
+            <Label Text="State" FontAttributes="Bold" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="2" />
+        </Grid>
+        <CollectionView  ItemsSource="{Binding ZipCode}"  >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ZipCodeModel">
+                    <Grid RowSpacing="0" RowDefinitions="10,Auto,10,0.5" ColumnDefinitions="33*,33*,33*" VerticalOptions="FillAndExpand">
+                        <Label  Text="{Binding zip}" Grid.Row="1" Grid.Column="0" />
+                        <Label  Text="{Binding city}" Grid.Row="1" Grid.Column="1" />
+                        <Label  Text="{Binding state}" Grid.Row="1" Grid.Column="2" />
+                        <BoxView  BackgroundColor="Black"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>

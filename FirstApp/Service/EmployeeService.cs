@@ -12,13 +12,17 @@ namespace FirstApp.Service
     public class EmployeeService:IEmployeeService
     {
 
+        #region Properties
         private readonly SQLiteAsyncConnection _dbConnection;
-        private string fileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/Employee.db";
+        private string fileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/Employee.db"; 
+        #endregion
+
+        #region Constructor
         public EmployeeService()
         {
 
             try
-            {             
+            {
                 _dbConnection = new SQLiteAsyncConnection(fileName);
                 _dbConnection.CreateTableAsync<EmployeeModel>();
             }
@@ -27,10 +31,12 @@ namespace FirstApp.Service
             }
 
         }
+        #endregion
 
-        public async Task<List<EmployeeModel>>  GetAllEmployees()
+        #region Public Method        
+        public async Task<List<EmployeeModel>> GetAllEmployees()
         {
-            return await _dbConnection.Table<EmployeeModel>().ToListAsync();           
+            return await _dbConnection.Table<EmployeeModel>().ToListAsync();
         }
 
         public async Task<int> InsertEmployee(EmployeeModel obj)
@@ -46,6 +52,7 @@ namespace FirstApp.Service
         public async Task<int> DeleteEmployee(EmployeeModel obj)
         {
             return await _dbConnection.DeleteAsync(obj);
-        }
+        } 
+        #endregion
     }
 }

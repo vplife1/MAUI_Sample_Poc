@@ -2,6 +2,7 @@
 using FirstApp.Model;
 using FirstApp.Service;
 using FirstApp.View;
+using Microsoft.Maui.Networking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,16 +19,18 @@ namespace FirstApp.ViewModel
         #region Properties
 
         public ObservableCollection<EmployeeModel> Employees { get; set; } = new ObservableCollection<EmployeeModel>();
+        public ObservableCollection<ZipCodeModel> ZipCode { get; set; } = new ObservableCollection<ZipCodeModel>();
         private readonly EmployeeService _employeeService;
+        private readonly ZipCodeService _zipCodeService;
         public ICommand AddEmpCommand { get; }
-        public ICommand BtnClickCommand { get; }
-                
+        public ICommand BtnClickCommand { get; }     
         #endregion
 
         #region Constructor
         public ShowEmployeePageViewModel()
         {
             _employeeService = new EmployeeService();
+            _zipCodeService = new ZipCodeService();
             AddEmpCommand = new Command(async () => await AddEmpCommandAsync());
             BtnClickCommand = new Command(async () => await BtnClickCommandAsync());
         }
@@ -51,6 +54,26 @@ namespace FirstApp.ViewModel
                     foreach (var employee in allEmployees)
                     {
                         Employees.Add(employee);
+                    }
+                }                
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        public async void ShowZipCode()
+        {
+            try
+            {
+                List<ZipCodeModel> zipcode = await _zipCodeService.GetAllZipCode();
+
+                if (zipcode?.Count > 0)
+                {
+                    ZipCode.Clear();
+                    foreach (var zip in zipcode)
+                    {
+                        ZipCode.Add(zip);
                     }
                 }                
 
