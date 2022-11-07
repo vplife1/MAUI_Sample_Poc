@@ -13,13 +13,13 @@ namespace FirstApp.Service
     {
 
         private readonly SQLiteAsyncConnection _dbConnection;
+        private string fileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"/Employee.db";
         public EmployeeService()
         {
 
             try
-            {
-                string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Employee.db3");
-                _dbConnection = new SQLiteAsyncConnection(dbPath);
+            {             
+                _dbConnection = new SQLiteAsyncConnection(fileName);
                 _dbConnection.CreateTableAsync<EmployeeModel>();
             }
             catch (Exception ex)

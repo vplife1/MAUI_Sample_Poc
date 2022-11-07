@@ -5,10 +5,12 @@ namespace FirstApp.View;
 
 public partial class AddEmployeePage : ContentPage
 {
+    private AddEmployeePageViewModel _viewModel;
     public AddEmployeePage()
     {
         InitializeComponent();
-        this.BindingContext = new AddEmployeePageViewModel();
+        _viewModel = new AddEmployeePageViewModel();
+        this.BindingContext = _viewModel;
     }
 
 

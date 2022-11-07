@@ -1,4 +1,5 @@
-﻿using FirstApp.Model;
+﻿using Android.Locations;
+using FirstApp.Model;
 using FirstApp.Service;
 using FirstApp.View;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static Java.Util.Jar.Attributes;
 
 namespace FirstApp.ViewModel
 {
@@ -18,9 +20,8 @@ namespace FirstApp.ViewModel
         public ObservableCollection<EmployeeModel> Employees { get; set; } = new ObservableCollection<EmployeeModel>();
         private readonly EmployeeService _employeeService;
         public ICommand AddEmpCommand { get; }
-        
-
-        
+        public ICommand BtnClickCommand { get; }
+                
         #endregion
 
         #region Constructor
@@ -28,6 +29,12 @@ namespace FirstApp.ViewModel
         {
             _employeeService = new EmployeeService();
             AddEmpCommand = new Command(async () => await AddEmpCommandAsync());
+            BtnClickCommand = new Command(async () => await BtnClickCommandAsync());
+        }
+
+        private async Task BtnClickCommandAsync()
+        {
+          await App.Current.MainPage.Navigation.PushAsync(new AddEmployeePage());
         }
         #endregion
 
@@ -36,16 +43,17 @@ namespace FirstApp.ViewModel
         {
             try
             {
-                //List<EmployeeModel> allEmployees = await _employeeService.GetAllEmployees();
+                List<EmployeeModel> allEmployees = await _employeeService.GetAllEmployees();
 
-                //if (allEmployees?.Count > 0)
-                //{
-                //    Employees.Clear();
-                //    foreach (var employee in allEmployees)
-                //    {
-                //        Employees.Add(employee);
-                //    }
-                //}
+                if (allEmployees?.Count > 0)
+                {
+                    Employees.Clear();
+                    foreach (var employee in allEmployees)
+                    {
+                        Employees.Add(employee);
+                    }
+                }                
+
             }
             catch (Exception ex)
             {
