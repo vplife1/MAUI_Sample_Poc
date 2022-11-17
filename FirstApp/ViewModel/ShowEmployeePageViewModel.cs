@@ -1,6 +1,7 @@
 ﻿using FirstApp.Model;
 using FirstApp.Service;
 using FirstApp.View;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +28,7 @@ namespace FirstApp.ViewModel
         public ShowEmployeePageViewModel()
         {
             _employeeService = new EmployeeService();
-            AddEmpCommand = new Command(async () => await AddEmpCommandAsync());
+            AddEmpCommand = new Command(async () => await AddEmpCommandAsync());         
         }
         #endregion
 
@@ -36,16 +37,16 @@ namespace FirstApp.ViewModel
         {
             try
             {
-                //List<EmployeeModel> allEmployees = await _employeeService.GetAllEmployees();
+                List<EmployeeModel> allEmployees = await _employeeService.GetAllEmployees();
 
-                //if (allEmployees?.Count > 0)
-                //{
-                //    Employees.Clear();
-                //    foreach (var employee in allEmployees)
-                //    {
-                //        Employees.Add(employee);
-                //    }
-                //}
+                if (allEmployees?.Count > 0)
+                {
+                    Employees.Clear();
+                    foreach (var employee in allEmployees)
+                    {
+                        Employees.Add(employee);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -62,6 +63,7 @@ namespace FirstApp.ViewModel
        
         public ICommand SelectedEmployeeCommand => new Command<EmployeeModel>(async (employee) =>
         {
+            Crashes.GenerateTestCrash();
             string res = await App.Current.MainPage.DisplayActionSheet("Operation", "Cancel", null, "Update", "Delete");
 
             switch (res)

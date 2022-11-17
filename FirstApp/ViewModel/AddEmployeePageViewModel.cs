@@ -1,5 +1,6 @@
 ﻿using FirstApp.Model;
 using FirstApp.Service;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace FirstApp.ViewModel
         #region Commands
         public ICommand AddEmployeeCommand => new Command(async () =>
         {
+            Crashes.GenerateTestCrash();
             EmployeeModel obj = new EmployeeModel
             {
                 Email = Email,
@@ -67,11 +69,11 @@ namespace FirstApp.ViewModel
             };
             if (_employeeID > 0)
             {
-                _employeeService.UpdateEmployee(obj);
+              await  _employeeService.UpdateEmployee(obj);
             }
             else
             {
-                _employeeService.InsertEmployee(obj);
+               await _employeeService.InsertEmployee(obj);
             }
             await App.Current.MainPage.Navigation.PopAsync();
         });
