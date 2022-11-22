@@ -2,6 +2,8 @@
 using FirstApp.Model;
 using FirstApp.Service;
 using FirstApp.View;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Maui.Networking;
 using System;
 using System.Collections.Generic;
@@ -88,6 +90,7 @@ namespace FirstApp.ViewModel
         #region Commands
         private async Task AddEmpCommandAsync()
         {
+            Analytics.TrackEvent("Add employee Page", new Dictionary<string, string> { {"first time", "Sample Text" } });
             await App.Current.MainPage.Navigation.PushAsync(new AddEmployeePage());
         }
        
@@ -99,12 +102,14 @@ namespace FirstApp.ViewModel
             {
                 case "Update":
                     await App.Current.MainPage.Navigation.PushAsync(new AddEmployeePage(employee));
+                    Analytics.TrackEvent("Update Employee", new Dictionary<string, string> { { "Update", employee.Name } });
                     break;
                 case "Delete":
                     int del =await _employeeService.DeleteEmployee(employee);
                     if (del > 0)
                     {
                         Employees.Remove(employee);
+                        Analytics.TrackEvent("Remove Employee", new Dictionary<string, string> { { "Remove", employee.Name } });
                     }
                     break;
             }

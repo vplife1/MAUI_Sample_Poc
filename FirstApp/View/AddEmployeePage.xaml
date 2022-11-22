@@ -4,10 +4,11 @@
               xmlns:viewmodels="clr-namespace:FirstApp.ViewModel"
              x:DataType="viewmodels:AddEmployeePageViewModel"
              x:Class="FirstApp.View.AddEmployeePage"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
              Title="AddEmployeePage">
     <VerticalStackLayout Padding="10,0,10,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-        <Entry Text="{Binding Name}" Placeholder="Enter Name" />
-        <Entry Text="{Binding Email}" Placeholder="Enter Email" />
+        <Entry Text="{Binding Name}" Placeholder="Enter Name" android:Entry.ImeOptions="Search"/>
+        <Entry Text="{Binding Email}" Placeholder="Enter Email" android:Entry.ImeOptions="Next"/>
         <Entry Text="{Binding Address}" Placeholder="Enter Address" />
         <Button x:Name="btnSaveUpdate" Text="Save" Command="{Binding AddEmployeeCommand}" />
     </VerticalStackLayout>

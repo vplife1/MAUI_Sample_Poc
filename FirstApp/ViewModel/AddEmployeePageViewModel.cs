@@ -1,5 +1,6 @@
 ﻿using FirstApp.Model;
 using FirstApp.Service;
+using Microsoft.AppCenter.Analytics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,6 @@ namespace FirstApp.ViewModel
         }
         #endregion
 
-
         #region Commands
         public ICommand AddEmployeeCommand => new Command(async () =>
         {
@@ -68,10 +68,11 @@ namespace FirstApp.ViewModel
             if (_employeeID > 0)
             {
                await _employeeService.UpdateEmployee(obj);
+               Analytics.TrackEvent("Updated Data store sucessfully done",new Dictionary<string ,string> { { "update", obj.Name} } );
             }
             else
             {
-              await  _employeeService.InsertEmployee(obj);
+              await  _employeeService.InsertEmployee(obj);              
             }
             await App.Current.MainPage.Navigation.PopAsync();
         });
